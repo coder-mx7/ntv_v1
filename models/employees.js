@@ -11,6 +11,8 @@ const UserScam = new mongoose.Schema({
   lastname: {
     type: String,
     required: true,
+    trim: true,
+
 
   },
   numero: {
@@ -24,15 +26,14 @@ const UserScam = new mongoose.Schema({
     type: String,
     required: true,
     
-     enum: ["Manager", "Employee", "Supervisor"] 
   },
   Duree_demploi: {
     startDate: { type: Date },
-    endDate: { type: Date, default: Date.now }
+    
   },
   Chatiment: [{
-    type: String,
-    default: ["Nettoyer le fichier"]
+    type: Array,
+    default: [{fdgfd:"Nettoyer le fichier"}]
   }]
 });
 
@@ -49,9 +50,8 @@ function valadtoinrejsterd(opj) {
     numero: joi.number(),
     Duree_demploi: joi.object({
       startDate: joi.date().iso().required(),
-      endDate: joi.date().iso()
-    })
-
+    }),
+    Chatiment:joi.array(),
   });
   return Schema.validate(opj);
 }
@@ -59,12 +59,13 @@ function valadtoinrejsterd(opj) {
 //valadtoin update
 function valadtoinupdate(opj) {
   const Schema = joi.object({
-    daysavlabels: joi.number().required(),
+    daysavlabels: joi.number(),
     Duree_demploi: joi.object({
       startDate: joi.date().iso(),
       endDate: joi.date().iso()
     }),
     numero: joi.number(),
+    Fonction:joi.string(),
   });
   return Schema.validate(opj);
 }

@@ -12,7 +12,6 @@ concatetodb()
 
 
 app.use('/api/employees',require('./routes/employeesroutus'))
-app.use('/api/allemployees',require('./routes/allemployeesrouts'))
 
 
 

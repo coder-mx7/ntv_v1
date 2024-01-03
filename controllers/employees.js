@@ -88,15 +88,22 @@ module.exports.updateUser = asynchandler(async (req, res) => {
         return res.status(400).json({ message: error.details[0].message })
     }
 
-    
-    const updateUser = await employees.findByIdAndUpdate(req.params.id, {
+    try {
+      const updateUser = await employees.findByIdAndUpdate(req.params.id, {
         $set: {
+            daysavlabels: req.body.daysavlabels,
+            Fonction: req.body.Fonction,
+            numero: req.body.numero,
             daysavlabels: req.body.daysavlabels,
         }
     }, {
         new: true,
     })
     res.json(updateUser)
+    } catch (error) {
+      console.log(error)
+    }
+    
 })
 
 /**-----------------------------------*
